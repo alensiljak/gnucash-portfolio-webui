@@ -1,5 +1,6 @@
 """ This is the entry point to the application """
 from logging.config import dictConfig
+
 from flask import Blueprint, Flask  # , send_from_directory
 from flask_assets import Bundle, Environment
 
