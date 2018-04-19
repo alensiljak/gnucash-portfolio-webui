@@ -79,3 +79,13 @@ This project contains the web application implemented in Flask. It is intended t
 The app is located in the `/app` directory.
 
 It is intended to run on a desktop workstation, with direct access to the GnuCash book file, stored as an SQLite database.
+
+## Benefits
+
+Considering several factors below, it might be preferrable to use an independent application to work with Portfolio then to provide the UI functionality through GnuCash reports using gnucash_utilities project. This approach would utilize the gnucash book/database directly.
+
+- Ease of development  
+Developing reports on piecash stack seems fairly straightforward and much simpler than Scheme, GnuCash reporting engine. The control of the output is also easier by directly editing HTML templates and CSS styles.
+
+- Performance  
+Comparing the output through GnuCash reports on Windows to the output produced using the Python stack (flask + jinja HTML output + piecash), the advantage is significantly on the side of the Python components.
