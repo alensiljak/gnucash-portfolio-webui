@@ -1,6 +1,13 @@
-# npm
+# ide files
+.idea
+
+# Node modules.
 app/node_modules/
 
+# Compiled web assets
+app/static/*
+
+#####
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -102,6 +109,3 @@ ENV/
 
 # mypy
 .mypy_cache/
-
-# ide files
-.idea
