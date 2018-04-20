@@ -1,7 +1,7 @@
 {
-  "name": "gnucash-portfolio-app",
+  "name": "gnucash-portfolio-webui",
   "description": "GnuCash Portfolio web application",
-  "version": "0.4.0",
+  "version": "0.0.1",
   "author": {
     "name": "Alen Siljak",
     "url": "http://alensiljak.tk"
@@ -10,7 +10,7 @@
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MisterY/gnucash-portfolio"
+    "url": "https://github.com/MisterY/gnucash-portfolio-webui"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",

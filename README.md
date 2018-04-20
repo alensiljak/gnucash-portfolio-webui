@@ -1,19 +1,20 @@
-# gnucash-portfolio-webui
-
-GnuCash Portfolio Web UI
+# GnuCash Portfolio Web UI
 
 The code is written in Python on the server-side, and HTML/JavaScript/CSS on the client-side.
 
-All the libraries are listed in `requirements.txt` for Python and `package.json` for node.
+All the dependent libraries are listed in `requirements.txt` for Python and `package.json` for node.
 
 To install the required development and runtime dependencies, run
 
 ```
 pip install -r requirements.txt
-npm install
 ```
 
-Npm's package.json is in the app directory.
+Npm's package.json is in the app directory. Go to app directory and run
+
+```
+npm install
+```
 
 To compile all client-side (.scss, .js) code, run
 
