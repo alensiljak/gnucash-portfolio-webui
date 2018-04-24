@@ -4,8 +4,10 @@ Account operations
 - editing of metadata (?)
 - list of transactions / register -> see transaction controller
 """
-try: import simplejson as json
-except ImportError: import json
+try:
+    import simplejson as json
+except ImportError:
+    import json
 import logging
 
 from flask import Blueprint, render_template, request
@@ -30,6 +32,7 @@ def index():
     """ root page """
     return render_template('account.html')
 
+
 @account_controller.route('/favourites')
 def favourites():
     """ Favourite accounts """
@@ -37,6 +40,7 @@ def favourites():
         model = __load_favourite_accounts_model(svc)
 
         return render_template('account.favourites.html', model=model)
+
 
 @account_controller.route('/list')
 def all_accounts():
@@ -49,10 +53,12 @@ def all_accounts():
         model = {"accounts": accounts}
         return render_template('account.list.html', model=model)
 
+
 @account_controller.route('/search')
 def search():
     """ Search for an account by typing in a part of the name """
     return render_template('account.search.html')
+
 
 @account_controller.route("/find")
 def find():
@@ -78,6 +84,7 @@ def find():
     json_output = json.dumps(model)
     return json_output
 
+
 @account_controller.route('/cash')
 def cash_balances():
     """ Investment cash balances """
@@ -96,6 +103,7 @@ def cash_balances():
             account_names)
     # Display the report
     return render_template('account.cash.html', model=model)
+
 
 @account_controller.route('/splits', methods=['GET'])
 def transactions():
@@ -117,11 +125,13 @@ def transactions():
             'account.transactions.html',
             model=model, input_model=in_model, reference=reference)
 
+
 @account_controller.route('/splits', methods=['POST'])
 def transactions_post():
     """ Account transactions """
     input_model = __get_input_model_for_tx()
     return account_splits(input_model.account_id)
+
 
 @account_controller.route('/<acct_id>/details')
 def account_details(acct_id):
@@ -130,6 +140,7 @@ def account_details(acct_id):
         model = __load_account_details_model(svc, acct_id)
 
         return render_template('account.details.html', model=model)
+
 
 @account_controller.route('/<acct_id>/splits')
 def account_splits(acct_id: str):
@@ -145,6 +156,7 @@ def account_splits(acct_id: str):
             'account.transactions.html',
             model=model, input_model=input_model, reference=reference)
 
+
 @account_controller.route('/transactions')
 def account_transactions():
     """ Lists only transactions """
@@ -153,6 +165,7 @@ def account_transactions():
         "account_id": account_id
     }
     return render_template('account.transactions.vue.html', model=model)
+
 
 @account_controller.route('/details/<path:fullname>')
 def details(fullname):
@@ -163,6 +176,7 @@ def details(fullname):
         model = __load_account_details_model(svc, account.guid)
 
         return render_template('account.details.html', model=model)
+
 
 #############
 # Partials
@@ -175,6 +189,7 @@ def api_favourites():
 
         return render_template('_account.favourites.html', model=model)
 
+
 #################
 # API section
 
@@ -184,7 +199,7 @@ def search_api():
     term = request.args.get('query')
     with BookAggregate() as svc:
         accounts = svc.accounts.find_by_name(term)
-        #result = json.dumps(accounts)
+        # result = json.dumps(accounts)
         model_list = [{"name": account.fullname, "id": account.guid}
                       for account in accounts]
         model_list.sort(key=lambda x: x["name"])
@@ -193,6 +208,7 @@ def search_api():
         result = json.dumps(result_dict)
     return result
 
+
 @account_controller.route('/api/search_autocomplete')
 def api_search_autocomplete():
     """ format the output for autocomplete. Client-side customization does not work
@@ -200,7 +216,7 @@ def api_search_autocomplete():
     term = request.args.get('query')
     with BookAggregate() as svc:
         accounts = svc.accounts.find_by_name(term)
-        #result = json.dumps(accounts)
+        # result = json.dumps(accounts)
         model_list = [{"value": account.fullname, "data": account.guid}
                       for account in accounts]
         model_list.sort(key=lambda x: x["value"])
@@ -208,6 +224,7 @@ def api_search_autocomplete():
         result_dict = {"suggestions": model_list}
         result = json.dumps(result_dict)
     return result
+
 
 @account_controller.route('/api/transactions')
 def api_transactions():
@@ -257,6 +274,7 @@ def api_transactions():
     result = json.dumps(model)
     return result
 
+
 ######################
 # Private
 
@@ -275,6 +293,7 @@ def __get_input_model_for_tx() -> AccountTransactionsInputModel:
 
     return model
 
+
 def __load_ref_model_for_tx(svc: BookAggregate):
     """ Load reference model """
     model = AccountTransactionsRefModel()
@@ -282,10 +301,11 @@ def __load_ref_model_for_tx(svc: BookAggregate):
     root_acct = svc.accounts.get_by_fullname("Assets")
     model.accounts = (
         svc.accounts.get_account_aggregate(root_acct)
-        .get_all_child_accounts_as_array()
+            .get_all_child_accounts_as_array()
     )
 
     return model
+
 
 def __load_view_model_for_tx(
         svc: BookAggregate,
@@ -315,15 +335,16 @@ def __load_view_model_for_tx(
 
     query = (
         svc.book.session.query(Split)
-        .join(Transaction)
-        .filter(Split.account_guid == input_model.account_id)
-        .filter(Transaction.post_date >= date_from.date())
-        .filter(Transaction.post_date <= date_to.date())
-        .order_by(Transaction.post_date)
+            .join(Transaction)
+            .filter(Split.account_guid == input_model.account_id)
+            .filter(Transaction.post_date >= date_from.date())
+            .filter(Transaction.post_date <= date_to.date())
+            .order_by(Transaction.post_date)
     )
     model.splits = query.all()
 
     return model
+
 
 def __load_search_model(search_term):
     """ Loads the data and returns an array of model objects"""
@@ -332,8 +353,8 @@ def __load_search_model(search_term):
     with BookAggregate() as svc:
         records = (
             svc.book.session.query(Account)
-            .filter(Account.name.like(search_term))
-            .all())
+                .filter(Account.name.like(search_term))
+                .all())
 
         for account in records:
             account_model = {
@@ -343,6 +364,7 @@ def __load_search_model(search_term):
             model_array.append(account_model)
 
     return model_array
+
 
 def __load_account_details_model(svc: BookAggregate, acct_id: str) -> AccountDetailsViewModel:
     """ Loads account details view model """
@@ -355,6 +377,7 @@ def __load_account_details_model(svc: BookAggregate, acct_id: str) -> AccountDet
         model.security_details_url = "/security/details/" + agg.account.commodity.mnemonic
 
     return model
+
 
 def __load_favourite_accounts_model(svc: BookAggregate):
     """ Loads favourite accounts view model """

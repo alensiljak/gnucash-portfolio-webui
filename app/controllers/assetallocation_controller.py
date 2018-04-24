@@ -5,28 +5,31 @@ Asset Allocation
 - manual adjustments to allocation (offset for imbalance)
 """
 from decimal import Decimal
-#from logging import log, DEBUG
-from flask import Blueprint, render_template #, request
+# from logging import log, DEBUG
+from flask import Blueprint, render_template  # , request
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.lib import generic
 from app.models.assetallocation_models import (AssetGroupDetailsViewModel,
                                                AssetGroupChildDetailViewModel)
 
-assetallocation_controller = Blueprint( # pylint: disable=invalid-name
+assetallocation_controller = Blueprint(  # pylint: disable=invalid-name
     'assetallocation_controller', __name__, url_prefix='/assetallocation')
+
 
 @assetallocation_controller.route('/')
 def asset_allocation():
     """ Asset Allocation without the securities """
     # look at AssetAllocationService in mmex.
-    with BookAggregate() as svc:
-        base_currency = svc.currencies.get_default_currency()
-
-        aaloc = svc.asset_allocation
-        model = aaloc.load_full_model(base_currency)
-        # populate actual allocation & difference.
-        output = render_template('asset_allocation.html', model=model)
+    # with BookAggregate() as svc:
+    #     base_currency = svc.currencies.get_default_currency()
+    #
+    #     aaloc = svc.asset_allocation
+    #     model = aaloc.load_full_model(base_currency)
+    #     # populate actual allocation & difference.
+    output = _load_asset_allocation()
+    #output = render_template('asset_allocation.html', model=model)
     return output
+
 
 @assetallocation_controller.route('/settings', methods=['GET'])
 def settings():
@@ -39,10 +42,12 @@ def settings():
     }
     return render_template('content.editor.html', model=model)
 
+
 @assetallocation_controller.route('/settings', methods=['POST'])
 def save_settings():
     """ Saves the settings content """
     return render_template('incomplete.html')
+
 
 @assetallocation_controller.route('/details/<path:fullname>')
 def details(fullname=None):
@@ -50,6 +55,7 @@ def details(fullname=None):
     model = __get_details_model(fullname)
 
     return render_template('assetallocation.details.html', model=model)
+
 
 #########################
 # Private
@@ -94,3 +100,14 @@ def __get_details_model(fullname: str) -> AssetGroupDetailsViewModel:
                 model.stocks.append(child)
 
     return model
+
+
+def _load_asset_allocation():
+    """ Load asset allocation from AA library """
+    from asset_allocation import AppAggregate, HtmlFormatter, AsciiFormatter
+    aa = AppAggregate()
+    model = aa.get_asset_allocation()
+    formatter = AsciiFormatter()
+    full = False
+    output = formatter.format(model, full=full)
+    return output

@@ -1,7 +1,6 @@
 """ Models for Portfolio section """
 
 from datetime import datetime
-from gnucash_portfolio.lib import datetimeutils
 #from dataclasses import dataclass
 
 

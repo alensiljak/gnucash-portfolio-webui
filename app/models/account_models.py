@@ -1,8 +1,6 @@
 """ Models for account views """
 
 from decimal import Decimal
-from datetime import timedelta
-#from logging import log, DEBUG
 from gnucash_portfolio.lib import datetimeutils
 
 
