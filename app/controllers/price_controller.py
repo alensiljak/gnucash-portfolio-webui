@@ -2,17 +2,20 @@
 from logging import log, DEBUG
 from decimal import Decimal
 from flask import Blueprint, request, render_template
-try: import simplejson as json
-except ImportError: import json
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.lib import datetimeutils
 from gnucash_portfolio.lib.csv_parser import CsvPriceParser
-from gnucash_portfolio.model.price_model import PriceModel
+from pricedb import PriceModel
 from app.models.price_models import (
     PriceImportViewModel, PriceImportInputModel, PriceImportSearchViewModel)
 from app.models.generic_models import ValidationResult
 
-price_controller = Blueprint( # pylint: disable=invalid-name
+price_controller = Blueprint(  # pylint: disable=invalid-name
     'price_controller', __name__, url_prefix='/price')
 
 
@@ -20,6 +23,7 @@ price_controller = Blueprint( # pylint: disable=invalid-name
 def index():
     """ Index page for prices """
     return render_template('incomplete.html')
+
 
 @price_controller.route('/download/<path:symbol>')
 def download(symbol):
@@ -29,6 +33,7 @@ def download(symbol):
         "symbol": symbol
     }
     return render_template('price.download.html', model=model)
+
 
 @price_controller.route('/import')
 def import_prices(message: str = None):
@@ -42,6 +47,7 @@ def import_prices(message: str = None):
         search = None
 
         return render_template('price.import.html', model=model, search=search, ref=ref)
+
 
 @price_controller.route('/review', methods=['POST'])
 def import_post():
@@ -69,6 +75,7 @@ def import_post():
 
         return render_template('price.import.confirm.html',
                                model=model, search=input_model, ref=ref)
+
 
 @price_controller.route('/load', methods=['POST'])
 def load_prices():
@@ -99,6 +106,7 @@ def load_prices():
 
         return render_template('price.import.result.html', model=model, result=result)
 
+
 @price_controller.route('/for/<symbol>')
 def prices_for_symbol(symbol):
     """ displays all prices for symbol """
@@ -110,6 +118,7 @@ def prices_for_symbol(symbol):
             "prices": prices
         }
         return render_template('security.prices.html', model=model)
+
 
 ###############################################
 # API
@@ -128,7 +137,6 @@ def api_create():
     model = PriceModel(symbol=symbol, currency=currency, value=Decimal(price_str),
                        rate_date=date_val)
 
-
     # log(DEBUG, "%s %s %s %s %s", date_str, timezone, price_str, currency, date_val)
     with BookAggregate(for_writing=True) as svc:
         success = svc.prices.import_price(model)
@@ -139,6 +147,7 @@ def api_create():
         "message": "check the success"
     }
     return json.dumps(result)
+
 
 ###############################################
 # Private
@@ -151,6 +160,7 @@ def __read_review_input_model() -> PriceImportInputModel:
     result.csv_file = request.files['import_file']
 
     return result
+
 
 def __validate_review_input_model(model: PriceImportInputModel):
     """ Validates user input """
@@ -172,11 +182,12 @@ def __validate_review_input_model(model: PriceImportInputModel):
     result.valid = True
     return result
 
+
 def __load_search_reference_model(svc: BookAggregate) -> PriceImportSearchViewModel:
     """ Populates the reference data for the search form """
     model = PriceImportSearchViewModel()
 
-    #cur_svc = CurrenciesAggregate(svc.book)
+    # cur_svc = CurrenciesAggregate(svc.book)
     model.currencies = svc.currencies.get_book_currencies()
 
     return model
