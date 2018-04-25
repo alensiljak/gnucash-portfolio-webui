@@ -4,7 +4,7 @@ Portfolio
 - portfolio value report
 """
 from pydatum import Datum
-from datetime import datetime #, timedelta
+from datetime import datetime  # , timedelta
 from flask import Blueprint, request, render_template
 
 from gnucash_portfolio.lib import portfoliovalue, datetimeutils
@@ -12,8 +12,9 @@ from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.securities import SecuritiesAggregate
 from app.models.portfolio_models import PortfolioValueInputModel, PortfolioValueViewModel
 
-portfolio_controller = Blueprint( # pylint: disable=invalid-name
+portfolio_controller = Blueprint(  # pylint: disable=invalid-name
     'portfolio_controller', __name__, url_prefix='/portfolio')
+
 
 @portfolio_controller.route('/value', methods=['GET'])
 def portfolio_value():
@@ -25,6 +26,7 @@ def portfolio_value():
 
     return render_template('portfolio.value.html', model=model)
 
+
 @portfolio_controller.route('/value', methods=['POST'])
 def portfolio_value_post():
     """ Accepts the filter parameters and displays the portfolio value report """
@@ -33,10 +35,11 @@ def portfolio_value_post():
     model = __get_model_for_portfolio_value(input_model)
     return render_template('portfolio.value.html', model=model)
 
+
 ######################
 # Private
 
-def __get_model_for_portfolio_value(input_model: PortfolioValueInputModel):
+def __get_model_for_portfolio_value(input_model: PortfolioValueInputModel) -> PortfolioValueViewModel:
     """ loads the data for portfolio value """
     result = PortfolioValueViewModel()
     result.filter = input_model
@@ -64,6 +67,7 @@ def __get_model_for_portfolio_value(input_model: PortfolioValueInputModel):
                 result.stock_rows.append(row)
 
     return result
+
 
 def __parse_input_model() -> PortfolioValueInputModel:
     """ Parses the search parameters from the request """
