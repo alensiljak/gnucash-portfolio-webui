@@ -28,7 +28,5 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    long_description=long_description,
-    install_requires=['gnucash-portfolio'],
-    python_requires='>=3.0'
+    long_description=long_description
 )
