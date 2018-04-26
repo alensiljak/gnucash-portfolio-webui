@@ -47,8 +47,6 @@
             {# Row 3 #}
             <div class="form-row">
                 <div class="form-group col">
-                </div>
-                <div class="form-group col">
                     <label>Unrealized Gain/Loss</label>
                     <input type="text" class="form-control text-right {% if model.profit_loss > 0 %}text-success{% else %}text-danger{% endif %}"
                         readonly value="{{ '{:,.2f}'.format(model.profit_loss) }}">
@@ -56,6 +54,10 @@
                 <div class="form-group col">
                     <label>Income ({{ model.currency }})</label>
                     <input type="text" class="form-control text-right" readonly value="{{ '{:,.2f}'.format(model.income) }}">
+                </div>
+                <div class="form-group col">
+                    <label>Return of capital</label>
+                    <input type="text" class="form-control text-right" readonly>
                 </div>
                 <div class="form-group col">
                     <label>Total Return</label>
@@ -66,8 +68,6 @@
             {# Row 4 #}
             <div class="form-row">
                 <div class="form-group col">
-                </div>
-                <div class="form-group col">
                     <label>Unrealized Gain/Loss %</label>
                     <input type="text" class="form-control text-right {% if model.profit_loss > 0 %}text-success{% else %}text-danger{% endif %}"
                         readonly value="{{ '{:,.2f}'.format(model.profit_loss_perc) }} %">
@@ -75,6 +75,8 @@
                 <div class="form-group col">
                     <label>Income %</label>
                     <input type="text" class="form-control text-right" readonly value="{{ '{:,.2f}'.format(model.income_perc) }} %">
+                </div>
+                <div class="form-group col">
                 </div>
                 <div class="form-group col">
                     <label>Total Return %</label>
