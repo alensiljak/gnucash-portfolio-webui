@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name="gnucash-portfolio-webui",
     packages=["app"],
-    version="0.0.1",
+    version="0.1.0",
     description="Web UI for GnuCash Portfolio",
     author="Alen Siljak",
     author_email="alen.siljak@gmx.com",
