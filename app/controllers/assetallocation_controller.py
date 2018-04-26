@@ -5,7 +5,7 @@ Asset Allocation
 - manual adjustments to allocation (offset for imbalance)
 """
 from decimal import Decimal
-# from logging import log, DEBUG
+
 from flask import Blueprint, render_template  # , request
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.lib import generic
@@ -19,15 +19,7 @@ assetallocation_controller = Blueprint(  # pylint: disable=invalid-name
 @assetallocation_controller.route('/')
 def asset_allocation():
     """ Asset Allocation without the securities """
-    # look at AssetAllocationService in mmex.
-    # with BookAggregate() as svc:
-    #     base_currency = svc.currencies.get_default_currency()
-    #
-    #     aaloc = svc.asset_allocation
-    #     model = aaloc.load_full_model(base_currency)
-    #     # populate actual allocation & difference.
     output = _load_asset_allocation()
-    #output = render_template('asset_allocation.html', model=model)
     return output
 
 

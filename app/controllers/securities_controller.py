@@ -8,7 +8,7 @@ Stocks
 - calculation of ROI
 """
 from decimal import Decimal
-from logging import log, DEBUG
+import logging
 import flask
 from flask import Blueprint, request, render_template
 
@@ -29,7 +29,7 @@ def index():
     """ Root. Search form. """
     # Check if we have a symbol
     symbol = request.args.get('search.symbol')
-    # log(DEBUG, "symbol = %s, args: %s", symbol, request.args)
+
     if symbol:
         return flask.redirect(flask.url_for('stock_controller.details', symbol=symbol), code=307)
         # code 307, 302
@@ -185,12 +185,12 @@ def __get_model_for_details(
 
     # Load asset classes to which this security belongs.
     # todo load asset allocation, find the parents for this symbol
-    svc.asset_allocation.load_config_only(svc.currencies.default_currency)
-    stocks = svc.asset_allocation.get_stock(model.symbol)
-    # log(DEBUG, "found %s stocks for %s", stocks, model.symbol)
-    for stock in stocks:
-        log(DEBUG, "adding %s asset classes", stock.asset_class)
-        model.asset_classes.append(stock.asset_class)
+    # svc.asset_allocation.load_config_only(svc.currencies.default_currency)
+    # stocks = svc.asset_allocation.get_stock(model.symbol)
+    #
+    # for stock in stocks:
+    #     # logging.debug(f"adding {stock.asset_class} asset classes")
+    #     model.asset_classes.append(stock.asset_class)
 
     return model
 
