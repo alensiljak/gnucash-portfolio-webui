@@ -14,7 +14,7 @@ from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.currencies import CurrencyAggregate
 from gnucash_portfolio.lib.database import Database
 from piecash import Commodity
-from pricedb import PriceModel
+from pricedb import PriceModel, SecuritySymbol
 
 try:
     import simplejson as json
@@ -120,7 +120,10 @@ def api_save_rates():
         prices_model = []
         for in_rate in filtered_rates:
             element = PriceModel()
-            element.symbol = in_rate["symbol"]
+
+            element.symbol = SecuritySymbol()
+            element.symbol.parse(in_rate["symbol"])
+
             element.currency = base_cur_symbol
             element.value = Decimal(in_rate["rate"])
             element.rate_date = rate_date

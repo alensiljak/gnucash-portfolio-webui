@@ -189,8 +189,10 @@ def __get_model_for_details(
     # stocks = svc.asset_allocation.get_stock(model.symbol)
     #
     # for stock in stocks:
-    #     # logging.debug(f"adding {stock.asset_class} asset classes")
     #     model.asset_classes.append(stock.asset_class)
+    from asset_allocation import AppAggregate
+    aa = AppAggregate()
+    aa.get_asset_classes_for_security(model.symbol)
 
     return model
 

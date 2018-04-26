@@ -10,7 +10,7 @@ except ImportError:
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.lib import datetimeutils
 from gnucash_portfolio.lib.csv_parser import CsvPriceParser
-from pricedb import PriceModel
+from pricedb import PriceModel, SecuritySymbol
 from app.models.price_models import (
     PriceImportViewModel, PriceImportInputModel, PriceImportSearchViewModel)
 from app.models.generic_models import ValidationResult
@@ -28,7 +28,6 @@ def index():
 @price_controller.route('/download/<path:symbol>')
 def download(symbol):
     """ download the latest price for security """
-    # log(DEBUG, symbol)
     model = {
         "symbol": symbol
     }
@@ -135,7 +134,8 @@ def api_create():
     price_str = request.json.get("price")
 
     model = PriceModel()
-    model.symbol = symbol
+    model.symbol = SecuritySymbol()
+    model.symbol.parse(symbol)
     model.currency = currency
     model.value = Decimal(price_str)
     model.rate_date = date_val
