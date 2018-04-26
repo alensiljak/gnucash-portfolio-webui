@@ -16,10 +16,12 @@ from gnucash_portfolio.lib.database import Database
 from piecash import Commodity
 from pricedb import PriceModel
 
-try: import simplejson as json
-except ImportError: import json
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
-currency_controller = Blueprint( # pylint: disable=invalid-name
+currency_controller = Blueprint(  # pylint: disable=invalid-name
     'currency_controller', __name__, url_prefix='/currency')
 
 
@@ -32,10 +34,12 @@ def index():
         output = render_template('currency.html', search=search_model)
     return output
 
+
 @currency_controller.route('/calculator')
 def calculator():
     """ Currency exchange calculator """
     return render_template('currency.calculator.html')
+
 
 @currency_controller.route('/search', methods=['GET', 'POST'])
 def post():
@@ -46,6 +50,7 @@ def post():
         output = render_template('currency.html', currency=currency, search=search_model)
     return output
 
+
 @currency_controller.route('/rates')
 def rates():
     """ currency exchange rates """
@@ -53,7 +58,7 @@ def rates():
     # get all used currencies and their (latest?) rates
     with BookAggregate() as svc:
         base_currency = svc.currencies.get_default_currency()
-        #print(base_currency)
+        # print(base_currency)
         currencies = svc.currencies.get_book_currencies()
         for cur in currencies:
             # skip the base currency
@@ -76,6 +81,7 @@ def rates():
         output = render_template('currency.rates.html', rates=fx_rates)
     return output
 
+
 @currency_controller.route('/download')
 def download():
     """ Download of exchange rates. React client-side app. """
@@ -85,8 +91,9 @@ def download():
         model = {
             "currencies": currencies
         }
-        # return render_template('currency.download.react.html', model=model)
+
         return render_template('currency.download.vue.html', model=model)
+
 
 ###############
 # API
@@ -99,7 +106,6 @@ def api_save_rates():
     # parse data
     cur_json = request.form.get('currencies')
     base_cur_symbol = request.form.get('base')
-    # rate_date = datetimeutils.parse_iso_date(request.form.get("date"))
     rate_date = Datum().from_iso_date_string(request.form.get("date"))
     fx_rates = json.loads(cur_json)
     # filter out the ones without rates
@@ -111,12 +117,19 @@ def api_save_rates():
             raise ValueError("The base currencies are not same!", base_cur_symbol, "vs",
                              book_base_cur)
         # Import rates
-        prices_model = ([PriceModel(symbol=in_rate["symbol"], currency=base_cur_symbol,
-                                    value=Decimal(in_rate["rate"]), rate_date=rate_date)
-                         for in_rate in filtered_rates])
+        prices_model = []
+        for in_rate in filtered_rates:
+            element = PriceModel()
+            element.symbol = in_rate["symbol"]
+            element.currency = base_cur_symbol
+            element.value = Decimal(in_rate["rate"])
+            element.rate_date = rate_date
+            prices_model.append(element)
+
         svc.currencies.import_fx_rates(prices_model)
 
     return "true"
+
 
 @currency_controller.route('/api/book_currencies')
 def api_book_currencies():
@@ -129,6 +142,7 @@ def api_book_currencies():
 
     result = json.dumps(symbols)
     return result
+
 
 @currency_controller.route('/api/rates')
 def api_rates():
@@ -146,6 +160,7 @@ def api_rates():
 
     result = json.dumps(rates)
     return result
+
 
 ###############################################################################
 

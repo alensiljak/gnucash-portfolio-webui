@@ -11,16 +11,18 @@ from decimal import Decimal
 from logging import log, DEBUG
 import flask
 from flask import Blueprint, request, render_template
-try: import simplejson as json
-except ImportError: import json
-from gnucash_portfolio.assetallocation import AssetAllocationAggregate
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.securities import SecuritiesAggregate
 from app.models import security_models
 
-
-stock_controller = Blueprint( # pylint: disable=invalid-name
+stock_controller = Blueprint(  # pylint: disable=invalid-name
     'stock_controller', __name__, url_prefix='/security')
+
 
 @stock_controller.route('/')
 def index():
@@ -39,6 +41,7 @@ def index():
             "symbol": None
         }
         return render_template('securities.html', model=model, filter=search)
+
 
 @stock_controller.route('/list')
 def list_securities():
@@ -61,6 +64,7 @@ def list_securities():
         result = render_template('security.list.html', model=model)
     return result
 
+
 @stock_controller.route('/details/<symbol>')
 def details(symbol: str):
     """ Displays the details in a separate page. Restful url. """
@@ -68,15 +72,18 @@ def details(symbol: str):
         model = __get_model_for_details(svc, symbol)
         return render_template('security.details.html', model=model)
 
+
 @stock_controller.route('/transactions/<symbol>')
 def transactions():
     """ Lists all transactions for security. Symbol must include namespace. """
     return render_template('incomplete.html')
 
+
 @stock_controller.route('/distributions/<symbol>')
 def distributions():
     """ Distributions for the security """
     return render_template('distributions.html', model=None)
+
 
 @stock_controller.route('/yield/<symbol>')
 def yield_calc(symbol: str):
@@ -103,6 +110,7 @@ def yield_calc(symbol: str):
         result = render_template('security.yield.html', model=model)
     return result
 
+
 ###################
 # API
 
@@ -118,6 +126,7 @@ def search_api():
         model = {"suggestions": sec_list}
         result = json.dumps(model)
         return result
+
 
 ####################
 # Private
@@ -160,7 +169,7 @@ def __get_model_for_details(
     else:
         model.income_perc = 0
     # income in the last 12 months
-    #income_last_year = sec_agg.get_income_total
+    # income_last_year = sec_agg.get_income_total
     # model.income_perc_last_12m = 0
 
     # total return
@@ -184,6 +193,7 @@ def __get_model_for_details(
         model.asset_classes.append(stock.asset_class)
 
     return model
+
 
 def __get_model_for_analysis(svc: BookAggregate):
     """ Loads model for analysis """

@@ -134,10 +134,12 @@ def api_create():
 
     price_str = request.json.get("price")
 
-    model = PriceModel(symbol=symbol, currency=currency, value=Decimal(price_str),
-                       rate_date=date_val)
+    model = PriceModel()
+    model.symbol = symbol
+    model.currency = currency
+    model.value = Decimal(price_str)
+    model.rate_date = date_val
 
-    # log(DEBUG, "%s %s %s %s %s", date_str, timezone, price_str, currency, date_val)
     with BookAggregate(for_writing=True) as svc:
         success = svc.prices.import_price(model)
         svc.save()
