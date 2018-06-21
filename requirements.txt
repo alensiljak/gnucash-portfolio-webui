@@ -1,2 +1,3 @@
 gnucash-portfolio
 flask
+flask-assets

@@ -28,5 +28,6 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    long_description=long_description
+    long_description=long_description,
+    install_requires=['flask', 'gnucash-portfolio', 'flask_assets'],
 )

@@ -4,15 +4,17 @@ The code is written in Python on the server-side, and HTML/JavaScript/CSS on the
 
 All the dependent libraries are listed in `requirements.txt` for Python and `package.json` for node.
 
+## Set Up
+
 To install the required development and runtime dependencies, run
 
-```
+```console
 pip install -r requirements.txt
 ```
 
 Npm's package.json is in the app directory. Go to app directory and run
 
-```
+```console
 npm install
 ```
 
@@ -26,7 +28,7 @@ in the "app" directory. This will compile production-ready images, styles, and s
 
 ### CSS
 
-Custom SCSS is compiled with Webpack (`npm run build`).
+Custom SCSS is compiled with Webpack (when `npm run build` is executed).
 
 Vendor CSS is bundled with Flask Assets automatically when the site starts.
 
