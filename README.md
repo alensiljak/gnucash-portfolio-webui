@@ -75,6 +75,10 @@ There are several ways to run the web app:
 
 - run `pylint app/` to run lint on the web app,
 
+### Debugging
+
+Add `"FLASK_APP": "app/app"` to vscode Python extension settings.
+
 # Web Application
 
 This project contains the web application implemented in Flask. It is intended to be used as the full GUI for accepting user input (parameters) and displaying the output.

@@ -192,7 +192,8 @@ def __get_model_for_details(
     #     model.asset_classes.append(stock.asset_class)
     from asset_allocation import AppAggregate
     aa = AppAggregate()
-    aa.get_asset_classes_for_security(model.symbol)
+    aa.open_session()
+    aa.get_asset_classes_for_security(None, model.symbol)
 
     return model
 
