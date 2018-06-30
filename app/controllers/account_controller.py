@@ -20,7 +20,6 @@ from gnucash_portfolio.accounts import AccountsAggregate
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.currencies import CommodityTypes
 from gnucash_portfolio.lib import datetimeutils, generic
-from gnucash_portfolio.lib.settings import Settings
 from piecash import Account, Split, Transaction
 
 account_controller = Blueprint(  # pylint: disable=invalid-name
@@ -380,10 +379,9 @@ def __load_account_details_model(svc: BookAggregate, acct_id: str) -> AccountDet
 
 
 def __load_favourite_accounts_model(svc: BookAggregate):
-    """ Loads favourite accounts view model """
-    settings = Settings()
-    favourite_accts = settings.favourite_accounts
-    accounts = svc.accounts.get_list(favourite_accts)
+    """ Loads the view model with favourite accounts information """
+    #accounts = svc.accounts.get_list(favourite_accts)
+    accounts = svc.accounts.get_favourite_accounts()
     # sort by name
     accounts.sort(key=lambda acc: acc.name)
 

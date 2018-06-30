@@ -101,12 +101,12 @@ Comparing the output through GnuCash reports on Windows to the output produced u
 
 ### Test Site
 
-```
+```console
 python setup.py sdist upload -r test
 ```
 
 ### Production Site
 
-```
+```console
 python setup.py sdist upload -r pypi
 ```
