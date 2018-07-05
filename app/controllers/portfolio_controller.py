@@ -7,10 +7,10 @@ from pydatum import Datum
 from datetime import datetime  # , timedelta
 from flask import Blueprint, request, render_template
 
-from gnucash_portfolio.lib import portfoliovalue, datetimeutils
+#from gnucash_portfolio.lib import portfoliovalue, datetimeutils
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.securities import SecuritiesAggregate
-from app.models.portfolio_models import PortfolioValueInputModel, PortfolioValueViewModel
+from gnucash_portfolio.reports.portfolio_models import PortfolioValueInputModel, PortfolioValueViewModel
 
 portfolio_controller = Blueprint(  # pylint: disable=invalid-name
     'portfolio_controller', __name__, url_prefix='/portfolio')
@@ -30,44 +30,16 @@ def portfolio_value():
 @portfolio_controller.route('/value', methods=['POST'])
 def portfolio_value_post():
     """ Accepts the filter parameters and displays the portfolio value report """
+    from gnucash_portfolio.reports import portfolio_value
+
     input_model = __parse_input_model()
 
-    model = __get_model_for_portfolio_value(input_model)
+    model = portfolio_value.run(input_model)
     return render_template('portfolio.value.html', model=model)
 
 
 ######################
 # Private
-
-def __get_model_for_portfolio_value(input_model: PortfolioValueInputModel) -> PortfolioValueViewModel:
-    """ loads the data for portfolio value """
-    result = PortfolioValueViewModel()
-    result.filter = input_model
-
-    ref_datum = Datum()
-    ref_datum.from_datetime(input_model.as_of_date)
-    ref_date = ref_datum.end_of_day()
-
-    result.stock_rows = []
-    with BookAggregate() as svc:
-        book = svc.book
-        stocks_svc = SecuritiesAggregate(book)
-
-        if input_model.stock:
-            symbols = input_model.stock.split(",")
-            stocks = stocks_svc.get_stocks(symbols)
-        else:
-            # stocks = portfoliovalue.get_all_stocks(book)
-            stocks = stocks_svc.get_all()
-
-        for stock in stocks:
-            row = portfoliovalue.get_stock_model_from(
-                book, stock, as_of_date=ref_date)
-            if row:
-                result.stock_rows.append(row)
-
-    return result
-
 
 def __parse_input_model() -> PortfolioValueInputModel:
     """ Parses the search parameters from the request """
