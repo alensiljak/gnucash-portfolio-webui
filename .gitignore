@@ -2,10 +2,10 @@
 .idea
 
 # Node modules.
-app/node_modules/
+gnucash_portfolio_webui/node_modules/
 
 # Compiled web assets
-app/static/*
+gnucash_portfolio_webui/static/*
 
 #####
 # Byte-compiled / optimized / DLL files

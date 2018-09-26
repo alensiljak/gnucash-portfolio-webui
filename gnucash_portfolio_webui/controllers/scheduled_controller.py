@@ -5,7 +5,7 @@ from typing import List
 
 from flask import Blueprint, render_template, request
 
-from app.models.transaction_models import ScheduledTxInputModel
+from gnucash_portfolio_webui.models.transaction_models import ScheduledTxInputModel
 from gnucash_portfolio.bookaggregate import BookAggregate
 from piecash import ScheduledTransaction
 

@@ -9,7 +9,7 @@ from decimal import Decimal
 
 from flask import Blueprint, render_template, request
 
-from app.models.currency_models import CurrencySearchModel, RateViewModel
+from gnucash_portfolio_webui.models.currency_models import CurrencySearchModel, RateViewModel
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.currencies import CurrencyAggregate
 from gnucash_portfolio.lib.database import Database

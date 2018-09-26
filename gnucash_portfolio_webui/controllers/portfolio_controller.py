@@ -9,7 +9,7 @@ from flask import Blueprint, request, render_template
 
 #from gnucash_portfolio.lib import portfoliovalue, datetimeutils
 from gnucash_portfolio.bookaggregate import BookAggregate
-from gnucash_portfolio.securities import SecuritiesAggregate
+from gnucash_portfolio.securitiesaggregate import SecuritiesAggregate
 from gnucash_portfolio.reports.portfolio_models import PortfolioValueInputModel, PortfolioValueViewModel
 
 portfolio_controller = Blueprint(  # pylint: disable=invalid-name

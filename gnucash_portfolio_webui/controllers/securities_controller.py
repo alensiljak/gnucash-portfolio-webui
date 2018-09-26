@@ -17,8 +17,8 @@ try:
 except ImportError:
     import json
 from gnucash_portfolio.bookaggregate import BookAggregate
-from gnucash_portfolio.securities import SecuritiesAggregate
-from app.models import security_models
+from gnucash_portfolio.securitiesaggregate import SecuritiesAggregate
+from gnucash_portfolio_webui.models import security_models
 
 stock_controller = Blueprint(  # pylint: disable=invalid-name
     'stock_controller', __name__, url_prefix='/security')

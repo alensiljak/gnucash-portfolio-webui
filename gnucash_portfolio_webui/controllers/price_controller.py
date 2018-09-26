@@ -11,9 +11,9 @@ from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.lib import datetimeutils
 from gnucash_portfolio.lib.csv_parser import CsvPriceParser
 from pricedb import PriceModel, SecuritySymbol
-from app.models.price_models import (
+from gnucash_portfolio_webui.models.price_models import (
     PriceImportViewModel, PriceImportInputModel, PriceImportSearchViewModel)
-from app.models.generic_models import ValidationResult
+from gnucash_portfolio_webui.models.generic_models import ValidationResult
 
 price_controller = Blueprint(  # pylint: disable=invalid-name
     'price_controller', __name__, url_prefix='/price')

@@ -12,7 +12,7 @@ import logging
 
 from flask import Blueprint, render_template, request
 
-from app.models.account_models import (AccountDetailsViewModel,
+from gnucash_portfolio_webui.models.account_models import (AccountDetailsViewModel,
                                        AccountTransactionsInputModel,
                                        AccountTransactionsRefModel,
                                        AccountTransactionsViewModel)

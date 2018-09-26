@@ -9,7 +9,7 @@ from decimal import Decimal
 from flask import Blueprint, render_template  # , request
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.lib import generic
-from app.models.assetallocation_models import (AssetGroupDetailsViewModel,
+from gnucash_portfolio_webui.models.assetallocation_models import (AssetGroupDetailsViewModel,
                                                AssetGroupChildDetailViewModel)
 
 assetallocation_controller = Blueprint(  # pylint: disable=invalid-name

@@ -5,7 +5,7 @@ from flask import Blueprint, Flask  # , send_from_directory
 from flask_assets import Bundle, Environment
 
 # Controllers/blueprints
-from app.controllers import (
+from gnucash_portfolio_webui.controllers import (
     account_controller, currency_controller, vanguard, distributions_controller,
     assetallocation_controller, index_controller, portfolio_controller, price_controller,
     securities_controller, settings_controller, scheduled_controller, transaction_controller)

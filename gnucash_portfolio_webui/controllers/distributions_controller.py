@@ -6,7 +6,7 @@ from typing import List
 from flask import Blueprint, request, render_template
 from piecash import Account, Commodity, Split, Book, Transaction
 
-from app.models.distribution_models import DistributionsInputModel, DistributionsViewModel
+from gnucash_portfolio_webui.models.distribution_models import DistributionsInputModel, DistributionsViewModel
 from gnucash_portfolio.bookaggregate import BookAggregate
 from gnucash_portfolio.lib import datetimeutils
 

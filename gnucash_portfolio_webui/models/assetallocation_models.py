@@ -1,7 +1,8 @@
 """ Models for Asset Allocation """
 
 from typing import List
-from gnucash_portfolio.assetallocation import AssetGroup
+#from gnucash_portfolio.assetallocation import AssetGroup
+from asset_allocation.model import AssetClass
 
 
 class AssetGroupDetailsViewModel:
@@ -10,7 +11,7 @@ class AssetGroupDetailsViewModel:
         self.fullname = None
         # base currency display name
         self.base_currency = None
-        self.asset_class: AssetGroup = None
+        self.asset_class: AssetClass = None
         self.classes: List[AssetGroupChildDetailViewModel] = []
         self.stocks: List[AssetGroupChildDetailViewModel] = []
 

@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="gnucash-portfolio-webui",
-    packages=["app"],
+    packages=["gnucash_portfolio_webui"],
     version="0.3.0",
     description="Web UI for GnuCash Portfolio",
     author="Alen Siljak",
