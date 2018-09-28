@@ -1,6 +1,6 @@
 # GnuCash Portfolio Web UI
 
-The code is written in Python on the server-side, and HTML/JavaScript/CSS on the client-side.
+The code is written in Python on the back-end, and HTML/JavaScript/CSS on the front-end.
 
 All the dependent libraries are listed in `requirements.txt` for Python and `package.json` for node.
 
@@ -52,6 +52,10 @@ and compile and monitor the client-side code with
 
 How to run the web app.
 
+### Desktop Application
+
+The installation will create a command-line application called `gnucash-portfolio`. This will start a desktop application, using pywebview to start a cross-platform web view for the Flask Python web application.
+
 ### First-Time Setup
 
 - Config:
@@ -59,17 +63,18 @@ How to run the web app.
 
 ### Execution
 
-All the functionality is provided through a web UI. To run, simply run the app with Python. Running
+All the functionality is provided through a web UI. Besides the desktop application, the server can be run with Python using
 
-`py app`
+`py gnucash_portfolio_webui`
 
-from the root folder will do.
+from the root folder.
 
 There are several ways to run the web app:
 
-1. Run `py app` directly,
+1. Run `py gnucash_portfolio_webui` directly,
 2. Run the "run" task from VS Code,
 3. Run "run.py run" (This script was created so that the app could be debugged with Python extension for Visual Studio Code).
+4. Run `gnucash_portfolio_webui.run.main()`
 
 ### Lint
 
@@ -77,7 +82,7 @@ There are several ways to run the web app:
 
 ### Debugging
 
-Add `"FLASK_APP": "app/app"` to vscode Python extension settings.
+Add `"FLASK_APP": "gnucash_portfolio_webui/app"` to vscode Python extension settings.
 
 # Web Application
 
