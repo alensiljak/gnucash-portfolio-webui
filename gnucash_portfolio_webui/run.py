@@ -2,7 +2,6 @@ from threading import Thread, Lock
 import logging
 import webview
 from time import sleep
-#from server import run_server
 from gnucash_portfolio_webui.app import run_server
 
 # Configuration
@@ -40,6 +39,7 @@ def main():
         sleep(0.1)
 
     logger.debug("Server started")
+    webview.config.use_qt = True
     webview.create_window("GnuCash Portfolio",
                           f"http://{server_ip}:{server_port}",
                           min_size=(1024, 768))
