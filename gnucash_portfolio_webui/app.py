@@ -84,8 +84,20 @@ assets.register(bundles)
 #         os.path.join(app.root_path, 'static'), 'briefcase.png',
 #         mimetype='image/png')
 
+def run_server():
+    """ Available to be called from outside """
+    #app.run()
+    #app.run(use_reloader=False)
+    #app.run(debug=False)
+    # Customizations available: 
+    # http://flask.pocoo.org/docs/1.0/api/?highlight=run#flask.Flask.run
+    # http://werkzeug.pocoo.org/docs/0.14/serving/#werkzeug.serving.run_simple
+    # Threaded mode is now enabled by default, as of v1.
+    app.run(host="127.0.0.1", threaded=True, use_reloader=False)
+    # port=23948, 
+
 ##################################################################################
 if __name__ == '__main__':
     # Use debug=True to enable template reloading while the app is running.
     # debug=True <= this is now controlled in config.py.
-    app.run()
+    run_server()
