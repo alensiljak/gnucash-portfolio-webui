@@ -101,17 +101,3 @@ Developing reports on piecash stack seems fairly straightforward and much simple
 
 - Performance  
 Comparing the output through GnuCash reports on Windows to the output produced using the Python stack (flask + jinja HTML output + piecash), the advantage is significantly on the side of the Python components.
-
-# Distribution
-
-### Test Site
-
-```console
-python setup.py sdist upload -r test
-```
-
-### Production Site
-
-```console
-python setup.py sdist upload -r pypi
-```
