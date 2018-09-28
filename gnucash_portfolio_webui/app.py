@@ -26,7 +26,10 @@ dictConfig({
 app = Flask(__name__, static_url_path='/static')  # pylint: disable=invalid-name
 
 # Configurations
-app.config.from_object('config')
+#app.config.from_object('config')
+app.config.from_object('gnucash_portfolio_webui.config')
+#app.config.from_envvar('YOURAPPLICATION_SETTINGS')
+
 # Register blueprints
 app.register_blueprint(index_controller.index_controller)
 app.register_blueprint(account_controller.account_controller)
