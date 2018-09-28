@@ -28,7 +28,8 @@ def url_ok(url, port):
         logger.exception("Server not started")
         return False
 
-if __name__ == '__main__':
+def main():
+    """ entry point for the setup """
     logger.debug("Starting server")
     t = Thread(target=run_server)
     t.daemon = True
@@ -42,3 +43,7 @@ if __name__ == '__main__':
     webview.create_window("GnuCash Portfolio",
                           f"http://{server_ip}:{server_port}",
                           min_size=(1024, 768))
+
+
+if __name__ == '__main__':
+    main()
