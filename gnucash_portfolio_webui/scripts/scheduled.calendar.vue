@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @import "~fullcalendar/dist/fullcalendar.css";
 
 /* color weekend */

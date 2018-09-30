@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');   // Copy files to des
 const CleanWebpackPlugin = require('clean-webpack-plugin'); // Clean destination folder.
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const siteSCSS = new ExtractTextPlugin('styles/site.scss');
+// const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     entry: {
@@ -129,6 +130,8 @@ module.exports = {
         //     $: "jquery",
         //     jQuery: "jquery"
         // })
+
+        // new VueLoaderPlugin(),
     ],
 
     performance: {
