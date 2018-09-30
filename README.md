@@ -76,13 +76,24 @@ There are several ways to run the web app:
 3. Run "run.py run" (This script was created so that the app could be debugged with Python extension for Visual Studio Code).
 4. Run `gnucash_portfolio_webui.run.main()`
 
+#### Server
+
+To run the web server only, go into gnucash-portfolio-webui directory and execute `flask run`.
+
 ### Lint
 
 - run `pylint app/` to run lint on the web app,
 
 ### Debugging
 
-Add `"FLASK_APP": "gnucash_portfolio_webui/app"` to vscode Python extension settings.
+The configuration for Flask debugging can be set in environment variables:
+
+```
+FLASK_APP=gnucash_portfolio_webui/app
+FLASK_ENV=development
+```
+See run-server.sh script.
+Add the variables to vscode Python extension settings.
 
 # Web Application
 
