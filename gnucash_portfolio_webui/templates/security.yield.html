@@ -34,8 +34,8 @@
                     <input type="text" class="form-control text-right" readonly value="{{ '{:,.2f}'.format(model.total_paid) }}">
                 </div>
                 <div class="form-group col">
-                    <label>Price ({{ model.currency }})</label>,
-                    <small class="ml-5 align-baseline">{% if model.price %}on {{ '{:%Y-%m-%d}'.format(model.price.datetime) }}{% endif %}</small>
+                    <label>Price ({{ model.price.currency }})</label>,
+                    <small class="ml-2 align-baseline">{% if model.price %}on {{ model.price.datum }}{% endif %}</small>
 
                     <input type="text" class="form-control text-right" readonly 
                         value="{{ model.price.value }}">
