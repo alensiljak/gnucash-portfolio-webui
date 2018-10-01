@@ -2,5 +2,6 @@
 @echo off
 
 set FLASK_ENV=development
-cd gnucash_portfolio_webui
+pushd gnucash_portfolio_webui
 flask run
+popd
