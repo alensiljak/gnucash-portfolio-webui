@@ -19,10 +19,17 @@ portfolio_controller = Blueprint(  # pylint: disable=invalid-name
 @portfolio_controller.route('/value', methods=['GET'])
 def portfolio_value():
     """ Portfolio Value report """
+    from gnucash_portfolio.reports import portfolio_value
+    
     # default filter parameters
-    search = PortfolioValueInputModel()
+    #search = PortfolioValueInputModel()
+    #model = __get_model_for_portfolio_value(search)
 
-    model = __get_model_for_portfolio_value(search)
+    parameters = PortfolioValueInputModel()
+    today = Datum()
+    today.today()
+    parameters.as_of_date = today.value
+    model = portfolio_value.run(parameters)
 
     return render_template('portfolio.value.html', model=model)
 
