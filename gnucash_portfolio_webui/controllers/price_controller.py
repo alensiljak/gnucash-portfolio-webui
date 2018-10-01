@@ -22,7 +22,7 @@ price_controller = Blueprint(  # pylint: disable=invalid-name
 @price_controller.route('/')
 def index():
     """ Index page for prices """
-    return render_template('incomplete.html')
+    return render_template('price.html')
 
 
 @price_controller.route('/download/<path:symbol>')
