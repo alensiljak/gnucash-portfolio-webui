@@ -2,13 +2,6 @@
 {% block title %}Prices - Latest{% endblock %}
 {% block content %}
 <h1>Latest Prices</h1>
-<p>Work in progress</p>
-
-<div class="mt-1">
-    <a href="/price/latest">latest</a>
-    &bullet;
-    <!-- <a class="btn btn-primary" href="/account/favourites">favourites</a> -->
-</div>
 
 <table class="table table-hover">
     <thead>
@@ -39,4 +32,11 @@
     </tbody>
 </table>
 
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $(function () {
+        $(".table").DataTable();
+    });
+</script> 
 {% endblock %}
