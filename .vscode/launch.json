@@ -38,7 +38,7 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "app/app"
+                "FLASK_APP": "gnucash_portfolio_webui/app"
             },
             "args": [
                 "run",

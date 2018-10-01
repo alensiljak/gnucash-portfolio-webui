@@ -1,6 +1,7 @@
 """ Price controller """
 from logging import log, DEBUG
 from decimal import Decimal
+from typing import List
 from flask import Blueprint, request, render_template
 
 try:
@@ -29,11 +30,12 @@ def index():
 def latest_prices():
     """ Displays the latest available prices """
     # todo: read from pricedb
-    from pricedb import PriceDbApplication
-    app = PriceDbApplication()
-    latest = app.get_latest_prices()
-    model = {
+    from pricedb import PriceDbApplication, PriceModel
 
+    app = PriceDbApplication()
+    latest: List[PriceModel] = app.get_latest_prices()
+    model = {
+        "prices": latest
     }
     return render_template("price.latest.html", model=model)
 

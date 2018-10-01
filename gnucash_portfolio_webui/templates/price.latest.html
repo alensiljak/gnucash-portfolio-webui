@@ -5,9 +5,38 @@
 <p>Work in progress</p>
 
 <div class="mt-1">
-    <a href="/price/latest">latest</a> 
+    <a href="/price/latest">latest</a>
     &bullet;
     <!-- <a class="btn btn-primary" href="/account/favourites">favourites</a> -->
 </div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Date/Time</th>
+            <th scope="col">Value</th>
+            <th scope="col">Currency</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in model.prices %}
+        <tr>
+            <td>
+                {{ row.symbol }}
+            </td>
+            <td>
+                {{ row.datum }}
+            </td>
+            <td class="text-right">
+                {{ row.value }}
+            </td>
+            <td>
+                {{ row.currency }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
