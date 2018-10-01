@@ -25,6 +25,18 @@ def index():
     return render_template('price.html')
 
 
+@price_controller.route('/latest')
+def latest_prices():
+    """ Displays the latest available prices """
+    # todo: read from pricedb
+    from pricedb import PriceDbApplication
+    app = PriceDbApplication()
+    latest = app.get_latest_prices()
+    model = {
+
+    }
+    return render_template("price.latest.html", model=model)
+
 @price_controller.route('/download/<path:symbol>')
 def download(symbol):
     """ download the latest price for security """
