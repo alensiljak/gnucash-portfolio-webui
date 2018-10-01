@@ -1,5 +1,4 @@
 """
 web app package
 """
-from . import controllers
-#import app
+from gnucash_portfolio_webui import controllers
