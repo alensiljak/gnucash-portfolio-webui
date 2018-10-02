@@ -39,27 +39,32 @@ def latest_prices():
     }
     return render_template("price.latest.html", model=model)
 
-@price_controller.route('/download/<path:symbol>')
-def download(symbol):
-    """ download the latest price for security """
-    model = {
-        "symbol": symbol
-    }
-    return render_template('price.download.html', model=model)
+@price_controller.route('/download')
+def download():
+    """ Page for downloading the latest prices """
+    pass
+
+# @price_controller.route('/download/<path:symbol>')
+# def download(symbol):
+#     """ download the latest price for security """
+#     model = {
+#         "symbol": symbol
+#     }
+#     return render_template('price.download.html', model=model)
 
 
-@price_controller.route('/import')
-def import_prices(message: str = None):
-    """ Stock price import. Data input. """
-    model = {}
-    if message:
-        model["message"] = message
+# @price_controller.route('/import')
+# def import_prices(message: str = None):
+#     """ Stock price import. Data input. """
+#     model = {}
+#     if message:
+#         model["message"] = message
 
-    with BookAggregate() as svc:
-        ref = __load_search_reference_model(svc)
-        search = None
+#     with BookAggregate() as svc:
+#         ref = __load_search_reference_model(svc)
+#         search = None
 
-        return render_template('price.import.html', model=model, search=search, ref=ref)
+#         return render_template('price.import.html', model=model, search=search, ref=ref)
 
 
 @price_controller.route('/review', methods=['POST'])
