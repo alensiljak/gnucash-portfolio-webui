@@ -39,8 +39,8 @@ def asset_allocation():
     return render_template("assetallocation.html", model=model)
 
 
-@assetallocation_controller.route("/clearcache")
-def clear_cache():
+@assetallocation_controller.route("/regenerate")
+def regenerate():
     """ Clears cached asset allocation file """
     from flask import redirect
     from gnucash_portfolio_webui.lib.caching import AssetAllocationCache
