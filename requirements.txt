@@ -1,3 +1,5 @@
 gnucash-portfolio
 flask
 flask-assets
+asset_allocation
+diskcache

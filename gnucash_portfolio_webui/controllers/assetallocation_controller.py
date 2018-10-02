@@ -1,7 +1,7 @@
 """
 Asset Allocation
 - display of asset allocation state
-- editing of allocations (store in .json)
+- editing of allocations
 - manual adjustments to allocation (offset for imbalance)
 """
 from decimal import Decimal
@@ -18,10 +18,37 @@ assetallocation_controller = Blueprint(  # pylint: disable=invalid-name
 
 @assetallocation_controller.route('/')
 def asset_allocation():
-    """ Asset Allocation without the securities """
-    output = _load_asset_allocation()
-    return output
+    """ Asset Allocation without the securities.
+    Cached in the temp dir.
+    """
+    from gnucash_portfolio_webui.lib.caching import AssetAllocationCache
+    from pydatum import Datum
 
+    cache = AssetAllocationCache()
+    output = cache.get()
+
+    if not output:
+        output = _load_asset_allocation()
+        today_str = Datum().to_long_datetime_string()
+        output = f"Generated on {today_str}\n" + output
+        cache.set(output)
+    
+    model = {
+        "output": output
+    }
+    return render_template("assetallocation.html", model=model)
+
+
+@assetallocation_controller.route("/clearcache")
+def clear_cache():
+    """ Clears cached asset allocation file """
+    from flask import redirect
+    from gnucash_portfolio_webui.lib.caching import AssetAllocationCache
+
+    cache = AssetAllocationCache()
+    cache.delete()
+
+    return redirect("/")
 
 @assetallocation_controller.route('/settings', methods=['GET'])
 def settings():

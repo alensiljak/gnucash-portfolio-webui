@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Asset Allocation{% endblock %}
+{% block content %}
+<h1>Asset Allocation</h1>
+
+<div class="float-right">
+    <a href="clearcache">Clear cache</a>
+</div>
+
+<pre>
+    {{ model.output }}
+</pre>
+
+{% endblock %}
