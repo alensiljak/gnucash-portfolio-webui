@@ -10,6 +10,7 @@
             <th scope="col">Date/Time</th>
             <th scope="col">Value</th>
             <th scope="col">Currency</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,9 @@
             </td>
             <td>
                 {{ row.currency }}
+            </td>
+            <td>
+                <a href="/price/downloadfor/{{row.symbol}}">download</a>
             </td>
         </tr>
         {% endfor %}

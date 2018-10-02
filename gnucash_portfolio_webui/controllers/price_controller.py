@@ -1,6 +1,6 @@
 """ Price controller """
 from logging import log, DEBUG
-from decimal import Decimal
+#from decimal import Decimal
 from typing import List
 from flask import Blueprint, request, render_template
 
@@ -39,10 +39,38 @@ def latest_prices():
     }
     return render_template("price.latest.html", model=model)
 
+
 @price_controller.route('/download')
-def download():
+def download_page():
     """ Page for downloading the latest prices """
-    pass
+    model = {}
+    return render_template('price.download.html', model=model)
+
+
+@price_controller.route('/downloadprices')
+def download_action():
+    """ Download the prices. Not active yet. """
+    import sys
+    from pricedb import PriceDbApplication
+
+    app = PriceDbApplication()
+    app.download_prices()
+    #sys.stdout.flush()
+
+
+@price_controller.route('/downloadfor/<path:symbol>')
+def download_price_for(symbol):
+    """ Downloads and displays the price for given symbol """
+    from pricedb import PriceDbApplication
+
+    s = SecuritySymbol("", "")
+    s.parse(symbol)
+
+    app = PriceDbApplication()
+    app.download_prices(namespace=s.namespace, symbol=s.mnemonic)
+
+    return latest_prices()
+
 
 # @price_controller.route('/download/<path:symbol>')
 # def download(symbol):
