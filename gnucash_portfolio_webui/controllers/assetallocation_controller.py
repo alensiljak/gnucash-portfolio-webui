@@ -21,7 +21,7 @@ def asset_allocation():
     """ Asset Allocation without the securities.
     Cached in the temp dir.
     """
-    from gnucash_portfolio_webui.lib.caching import AssetAllocationCache
+    from gnucash_portfolio_webui.infrastructure.caching import AssetAllocationCache
     from pydatum import Datum
 
     cache = AssetAllocationCache()
