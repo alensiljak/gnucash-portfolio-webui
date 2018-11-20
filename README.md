@@ -42,7 +42,7 @@ The bundle will be built automatically during the app runtime. No additional act
 ## Development
 
 For development, run the web site:
-`py app`
+`python app.py`
 
 and compile and monitor the client-side code with
 
@@ -79,6 +79,8 @@ There are several ways to run the web app:
 #### Server
 
 To run the web server only, go into gnucash-portfolio-webui directory and execute `flask run`.
+
+Run `npm run build` to compile the UI for production version.
 
 ### Lint
 

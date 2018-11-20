@@ -2,6 +2,8 @@
 @echo off
 
 set FLASK_ENV=development
-pushd gnucash_portfolio_webui
-flask run
-popd
+::pushd gnucash_portfolio_webui
+::flask run
+::popd
+
+gnucash_portfolio_webui\app.py
