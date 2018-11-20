@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Setup"""
+from setuptools import setup, find_packages
 from distutils.core import setup
 from codecs import open
 from os import path
@@ -11,8 +12,9 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="gnucash-portfolio-webui",
-    packages=["gnucash_portfolio_webui"],
-    version="1.3.2",
+    #packages=["gnucash_portfolio_webui"],
+    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+    version="1.3.3",
     description="Web UI for GnuCash Portfolio",
     author="Alen Siljak",
     author_email="alen.siljak@gmx.com",
