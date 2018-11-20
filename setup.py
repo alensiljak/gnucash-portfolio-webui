@@ -12,7 +12,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name="gnucash-portfolio-webui",
     packages=["gnucash_portfolio_webui"],
-    version="1.3.1",
+    version="1.3.2",
     description="Web UI for GnuCash Portfolio",
     author="Alen Siljak",
     author_email="alen.siljak@gmx.com",
@@ -30,7 +30,11 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     long_description=long_description,
-    #install_requires=['flask', 'gnucash-portfolio', 'flask_assets']
+    install_requires=[
+        'flask',
+        'flask_assets',
+        'gnucash-portfolio'
+    ],
     entry_points={
         'console_scripts': [
             'gpweb=gnucash_portfolio_webui.app:run_server',
