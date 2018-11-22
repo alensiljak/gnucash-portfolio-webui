@@ -14,7 +14,7 @@ setup(
     name="gnucash-portfolio-webui",
     #packages=["gnucash_portfolio_webui"],
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    version="1.3.4",
+    version="1.3.5",
     description="Web UI for GnuCash Portfolio",
     author="Alen Siljak",
     author_email="alen.siljak@gmx.com",

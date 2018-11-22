@@ -1,2 +1,3 @@
 include README.md
-include templates/*.html
+include gnucash_portfolio_webui/templates/*.html
+include gnucash_portfolio_webui/static/*.*

@@ -9,8 +9,7 @@
 del dist\*
 
 :: Create the binary package.
-setup.py sdist 
-::bdist_wheel
+setup.py sdist bdist_wheel
 
 :: Deploy to test server.
 twine upload -u cicko --repository-url https://test.pypi.org/legacy/ dist/*
