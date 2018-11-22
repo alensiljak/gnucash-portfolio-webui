@@ -1,3 +1,19 @@
 include README.md
 include gnucash_portfolio_webui/templates/*.html
 include gnucash_portfolio_webui/static/*.*
+
+include gnucash_portfolio_webui/node_modules/font-awesome/css/font-awesome.min.css
+include gnucash_portfolio_webui/node_modules/daterangepicker/daterangepicker.css
+include gnucash_portfolio_webui/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css
+include gnucash_portfolio_webui/node_modules/select2/dist/css/select2.min.css
+include gnucash_portfolio_webui/node_modules/chosen-js/chosen.min.css
+
+include gnucash_portfolio_webui/node_modules/popper.js/dist/umd/popper.min.js
+include gnucash_portfolio_webui/node_modules/moment/min/moment.min.js
+include gnucash_portfolio_webui/node_modules/daterangepicker/daterangepicker.js
+include gnucash_portfolio_webui/node_modules/bootstrap/dist/js/bootstrap.min.js
+include gnucash_portfolio_webui/node_modules/datatables.net/js/jquery.dataTables.js
+include gnucash_portfolio_webui/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js
+include gnucash_portfolio_webui/node_modules/select2/dist/js/select2.min.js
+include gnucash_portfolio_webui/node_modules/chosen-js/chosen.jquery.min.js
+include gnucash_portfolio_webui/node_modules/devbridge-autocomplete/dist/jquery.autocomplete.min.js
