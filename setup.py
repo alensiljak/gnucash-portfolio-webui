@@ -35,7 +35,8 @@ setup(
     install_requires=[
         'flask',
         'flask_assets',
-        'gnucash-portfolio'
+        'gnucash-portfolio',
+        'diskcache'
     ],
     entry_points={
         'console_scripts': [
